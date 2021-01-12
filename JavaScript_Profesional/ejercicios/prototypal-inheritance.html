@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Herencia Prototipal</h1>
+    <script>
+      function Hero(name) {
+        this.name = name;
+      }
+
+      Hero.prototype.saludar = function () {
+        console.log(`Hola, soy ${this.name}`);
+      };
+
+      const zelda = new Hero("Zelda");
+
+      // propiedades de la instancia
+      console.log("Name", zelda.name);
+      // propiedades de la "clase"
+      console.log("Saludar", zelda.saludar);
+
+      // propiedades heredadas
+      console.log("toString", zelda.toString);
+
+      // hasOwnProperty (de donde sale toString o esto?)
+
+      console.log(
+        'zelda.hasOwnProperty("name"):',
+        zelda.hasOwnProperty("name")
+      );
+      console.log(
+        'zelda.hasOwnProperty("name"):',
+        zelda.hasOwnProperty("saludar")
+      );
+
+      const zeldaProto = Object.getPrototypeOf(zelda);
+      console.log(zeldaProto);
+    </script>
+  </body>
+</html>

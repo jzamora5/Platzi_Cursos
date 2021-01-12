@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Scope</h1>
+    <script>
+      // Global Scope
+      var message = "Hello, Platzi!";
+      var $ = function (message) {
+        console.log("Say: " + message);
+      };
+
+      // Function Scope
+      function printNumbers() {
+        for (var i = 0; i < 10; i++) {
+          function eventuallyPrintNumber(n) {
+            setTimeout(function () {
+              console.log(n);
+              if (n === 9) {
+                console.log("======================");
+              }
+            }, 100);
+          }
+          eventuallyPrintNumber(i);
+        }
+      }
+      printNumbers();
+      function printNumbers2() {
+        for (let i = 0; i < 10; i++) {
+          setTimeout(function () {
+            console.log(i);
+          }, 100);
+        }
+      }
+      printNumbers2();
+
+      // Module Scope
+    </script>
+  </body>
+</html>

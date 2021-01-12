@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Call Apply Bind</h1>
+
+    <ul>
+      <li><button class="call-to-action">Aprender</button></li>
+      <li><button class="call-to-action">Aprender Más</button></li>
+      <li><button class="call-to-action">¡Nunca pares de Aprender!</button></li>
+    </ul>
+
+    <script>
+      // Pasa this con call
+      function saludar() {
+        console.log(`Hola, soy ${this.name} ${this.lastname}`);
+      }
+
+      const richard = {
+        name: "Richar",
+        lastname: "Kaufman",
+      };
+      saludar.call(richard);
+
+      // call con argumentos
+      function caminar(metros, direccion) {
+        console.log(`${this.name} camina ${metros} hacia ${direccion}`);
+      }
+
+      caminar.call(richard, 400, "norte");
+
+      // apply
+      caminar.apply(richard, [800, "sur"]);
+
+      // bind
+
+      const daniel = {
+        name: "Daniel",
+        lastname: "Sanchez",
+      };
+
+      saludar.bind(daniel);
+
+      const danielSaluda = saludar.bind(daniel);
+
+      danielSaluda();
+
+      // bind con argumentos
+      const danielCamina = caminar.bind(daniel);
+
+      danielCamina(1000, "este");
+
+      const danielCamina2 = caminar.bind(daniel, 500, "sur");
+      danielCamina2();
+
+      const danielCamina3 = caminar.bind(daniel, 2000);
+      danielCamina3("norte");
+
+      // Ejemplos Practicos
+
+      const buttons = document.getElementsByClassName("call-to-action");
+      //   buttons.forEach((button) => {
+      //     button.onclick = () => {
+      //       alert("Nunca pares de aprender");
+      //     };
+      //   });
+
+      // NodeList
+
+      Array.prototype.forEach.call(buttons, (button) => {
+        button.onclick = () => alert("Nunca pares de aprender");
+      });
+    </script>
+  </body>
+</html>

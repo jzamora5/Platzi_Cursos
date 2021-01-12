@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Closures</h1>
+    <script>
+      // Closures
+      // IIFE Immediately-invoked Function Expression
+      (function () {
+        let color = "green";
+
+        function printColor() {
+          console.log(color);
+        }
+
+        printColor();
+      })();
+      // funciones que regresan funciones
+
+      function makeColorPrinter(color) {
+        let colorMessage = `The color is ${color}`;
+        return function () {
+          console.log(colorMessage);
+        };
+      }
+
+      let greenColorPrinter = makeColorPrinter("green");
+      console.log(greenColorPrinter());
+
+      // variables privadas
+
+      function makeCounter(n) {
+        let count = n;
+
+        return {
+          increase: function () {
+            count++;
+          },
+          decrease: function () {
+            count--;
+          },
+          getCount: function () {
+            return count;
+          },
+        };
+      }
+
+      let counter = makeCounter(7);
+
+      console.log(counter.count);
+      console.log("The count is " + counter.getCount());
+      console.log(counter.increase());
+      console.log("The count is " + counter.getCount());
+    </script>
+  </body>
+</html>
