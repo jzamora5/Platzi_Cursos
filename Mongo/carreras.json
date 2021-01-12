@@ -1,0 +1,15 @@
+{
+    "_id": "5c7605235f627d4ee1c77e81",
+    "nombre": "Carrera de AWS",
+    "descripcion": "En esta carrera aprenderas AWS",
+    "cursos": [
+        {
+            "_id": "",
+            "nombre": "Nombre del Curso"
+        },
+        {
+            "_id": "",
+            "nombre": "Nombre del Curso"
+        }
+    ]
+}
