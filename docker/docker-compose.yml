@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  app:
+    # image: platziapp
+    # Utilizar Dockerfile
+    build: .
+    environment:
+      MONGO_URL: "mongodb://db:27017/test"
+    depends_on:
+      - db
+    #ports:
+    #- "3000-3010:3000"
+    volumes:
+      - .:/usr/src
+      # No sobreescribir
+      - /usr/src/node_modules
+
+  db:
+    image: mongo
+
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - app
+    ports:
+      - "3000:80"
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
