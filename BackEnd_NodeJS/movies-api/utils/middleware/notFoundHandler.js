@@ -1,7 +1,7 @@
-const boom = require('@hapi/boom');
+const boom = require("@hapi/boom");
 
 function notFoundHandler(req, res) {
-  console.log(boom.notFound());
+  // console.log(boom.notFound());
 
   const {
     output: { statusCode, payload },
