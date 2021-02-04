@@ -26,6 +26,12 @@ const reducer = (state, action) => {
         user: action.payload,
       };
 
+    case "REGISTER_REQUEST":
+      return {
+        ...state,
+        user: action.payload,
+      };
+
     default:
       break;
   }
