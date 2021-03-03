@@ -3,6 +3,7 @@ import scrapy
 # Titulo = //h1/a/text()
 # Citas = //span[@class="text" and @itemprop="text"]/text()
 # Top ten tags = //div[contains(@class, "tags-box")]//span[@class="tag-item"]/a/text()
+# Next Page Button = //ul[@class="pager"]//li[@class="next"]/a/@href
 
 
 class QuotesSpider(scrapy.Spider):
@@ -10,6 +11,10 @@ class QuotesSpider(scrapy.Spider):
     start_urls = [
         'http://quotes.toscrape.com/page/1/'
     ]
+    custom_settings = {
+        'FEED_URI': 'quotes.json',
+        'FEED_FORMAT': 'json'
+    }
 
     def parse(self, response):
 
@@ -26,3 +31,9 @@ class QuotesSpider(scrapy.Spider):
             'quotes': quotes,
             'top_ten_tags': top_ten_tags
         }
+
+        next_page_button_link = response.xpath(
+            '//ul[@class="pager"]//li[@class="next"]/a/@href').get()
+
+        if next_page_button_link:
+            yield response.follow(next_page_button_link, callback=self.parse)
