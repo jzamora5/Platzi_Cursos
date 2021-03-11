@@ -1,0 +1,3 @@
+https://www.cia.gov/readingroom/historical-collections
+
+DECLASSIFIED_LINKS=//a[starts-with(@href, "collection") and (parent::h3|parent::h2)]/@href
