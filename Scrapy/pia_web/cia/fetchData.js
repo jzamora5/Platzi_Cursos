@@ -2,9 +2,7 @@ let = $accordion = document.getElementById("accordion");
 
 let ciaData = null;
 
-fetch(
-  "https://app.scrapinghub.com/api/v2/datasets/kdybI1E79Ww/download?format=json"
-)
+fetch("https://app.zyte.com/api/v2/datasets/aLLeTo1xVgX/download?format=json")
   .then((response) => {
     return response.json();
   })
