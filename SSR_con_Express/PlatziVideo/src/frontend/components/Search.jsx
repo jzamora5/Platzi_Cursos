@@ -1,10 +1,10 @@
-import React from 'react';
-import classNames from 'classnames';
-import '../assets/styles/components/Search.scss';
+import React from "react";
+import classNames from "classnames";
+import "../assets/styles/components/Search.scss";
 
 const Search = ({ isHome }) => {
-  const inputStyle = classNames('input', {
-    isHome
+  const inputStyle = classNames("input", {
+    isHome,
   });
   return (
     <section className="main">
@@ -12,6 +12,6 @@ const Search = ({ isHome }) => {
       <input type="text" className={inputStyle} placeholder="Buscar..." />
     </section>
   );
-}
+};
 
 export default Search;
