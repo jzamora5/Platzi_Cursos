@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { createStore, compose } from "redux";
-import { Router } from "react-router";
-import { createBrowserHistory } from "history";
-import reducer from "./reducers";
-import initialState from "./initialState";
-import App from "./routes/App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, compose } from 'redux';
+import { Router } from 'react-router';
+import { createBrowserHistory } from 'history';
+import reducer from './reducers';
+import initialState from './initialState';
+import App from './routes/App';
 
 const history = createBrowserHistory();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -18,5 +18,5 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>,
-  document.getElementById("app")
+  document.getElementById('app'),
 );
