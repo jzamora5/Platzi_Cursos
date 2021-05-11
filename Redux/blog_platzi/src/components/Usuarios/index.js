@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as usuariosActions from '../../actions/usuariosActions';
 
 class Usuarios extends Component {
-  // async componentDidMount() {
-  //   const response = await axios.get(
-  //     "https://jsonplaceholder.typicode.com/users"
-  //   );
-
-  //   this.setState({
-  //     usuarios: response.data,
-  //   });
-  // }
+  componentDidMount() {
+    // const response = await axios.get(
+    //   "https://jsonplaceholder.typicode.com/users"
+    // );
+    // this.setState({
+    //   usuarios: response.data,
+    // });
+    this.props.traerTodos();
+  }
 
   ponerFilas = () =>
     this.props.usuarios.map((usuario) => (
@@ -45,6 +45,4 @@ const mapStateToProps = (reducers) => {
   return reducers.usuariosReducer;
 };
 
-export default connect(mapStateToProps, {
-  /*Actions*/
-})(Usuarios);
+export default connect(mapStateToProps, usuariosActions)(Usuarios);
