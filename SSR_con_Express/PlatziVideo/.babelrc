@@ -1,9 +1,7 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties",
-    // para que acepte async/ await
-    "@babel/plugin-transform-runtime",
-    "react-hot-loader/babel"
-  ]
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": ["react-hot-loader/babel"]
 }
