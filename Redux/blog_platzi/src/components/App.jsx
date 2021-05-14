@@ -1,7 +1,7 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Menu from "./Menu";
-import Usuarios from "./Usuarios";
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Menu from './Menu';
+import Usuarios from './Usuarios';
 
 const Tareas = () => <div>Tareas</div>;
 
