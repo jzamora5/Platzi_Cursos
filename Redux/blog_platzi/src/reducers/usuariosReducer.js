@@ -13,6 +13,7 @@ const usuariosReducer = (state = INITIAL_STATE, action) => {
         ...state,
         usuarios: action.payload,
         cargando: false,
+        error: '',
       };
 
     case CARGANDO:

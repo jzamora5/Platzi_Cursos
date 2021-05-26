@@ -7,13 +7,9 @@ import Tabla from './Tabla';
 
 class Usuarios extends Component {
   componentDidMount() {
-    // const response = await axios.get(
-    //   "https://jsonplaceholder.typicode.com/users"
-    // );
-    // this.setState({
-    //   usuarios: response.data,
-    // });
-    this.props.traerTodos();
+    if (!this.props.usuarios.length) {
+      this.props.traerTodos();
+    }
   }
 
   ponerContenido = () => {
