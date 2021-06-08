@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Menu from './Menu';
 import Usuarios from './Usuarios';
 import Publicaciones from './Publicaciones';
-
-const Tareas = () => <div>Tareas</div>;
+import Tareas from './Tareas';
+import TareasGuardar from './Tareas/Guardar';
 
 const App = () => (
   <BrowserRouter>
@@ -13,6 +13,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Usuarios}></Route>
         <Route exact path="/tareas" component={Tareas}></Route>
+        <Route exact path="/tareas/guardar" component={TareasGuardar}></Route>
         <Route
           exact
           path="/publicaciones/:key"
