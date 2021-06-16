@@ -12,11 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.5",
     "i": "^0.3.6",
+    "mongo": "^0.1.0",
     "npm": "^7.17.0"
   },
   "devDependencies": {

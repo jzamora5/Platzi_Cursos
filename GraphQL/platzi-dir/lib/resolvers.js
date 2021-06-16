@@ -1,37 +1,37 @@
 'use strict';
 
-const courses = [
-  {
-    _id: '1',
-    title: 'Mi Titulo',
-    teacher: 'Mi Profesor',
-    description: 'Una descripcion',
-    topic: 'Programacion',
-  },
-  {
-    _id: '2',
-    title: 'Mi Titulo 2',
-    teacher: 'Mi Profesor',
-    description: 'Una descripcion',
-    topic: 'Programacion',
-  },
-  {
-    _id: '3',
-    title: 'Mi Titulo 3',
-    teacher: 'Mi Profesor',
-    description: 'Una descripcion',
-    topic: 'Programacion',
-  },
-];
+const connectDB = require('./db');
+const { ObjectID } = require('mongodb');
 
 module.exports = {
   Query: {
-    getCourses: () => {
+    getCourses: async () => {
+      let db;
+      let courses = [];
+
+      try {
+        db = await connectDB();
+        courses = await db.collection('courses').find().toArray();
+      } catch (error) {
+        console.error(error);
+      }
+
       return courses;
     },
-    getCourse: (root, args) => {
-      const course = courses.filter((course) => course._id === args.id);
-      return course.pop();
+    getCourse: async (root, args) => {
+      let db;
+      let course;
+
+      try {
+        db = await connectDB();
+        course = await db
+          .collection('courses')
+          .findOne({ _id: ObjectID(args.id) });
+      } catch (error) {
+        console.error(error);
+      }
+
+      return course;
     },
   },
 };
