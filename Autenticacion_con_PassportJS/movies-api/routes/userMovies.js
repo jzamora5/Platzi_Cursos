@@ -9,7 +9,7 @@ const { userIdSchema } = require('../utils/schemas/users');
 const { createUserMovieSchema } = require('../utils/schemas/userMovies');
 
 function userMoviesApi(app) {
-  const router = express.router();
+  const router = express.Router();
 
   app.use('/api/user-movies', router);
 
