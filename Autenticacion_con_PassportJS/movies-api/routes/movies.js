@@ -1,10 +1,11 @@
 const express = require('express');
+const passport = require('passport');
 const MoviesService = require('../services/movies');
 
 const {
   movieIdSchema,
   createMovieSchema,
-  updateMovieSchema
+  updateMovieSchema,
 } = require('../utils/schemas/movies');
 
 const validationHandler = require('../utils/middleware/validationHandler');
@@ -12,8 +13,11 @@ const validationHandler = require('../utils/middleware/validationHandler');
 const cacheResponse = require('../utils/cacheResponse');
 const {
   FIVE_MINUTES_IN_SECONDS,
-  SIXTY_MINUTES_IN_SECONDS
+  SIXTY_MINUTES_IN_SECONDS,
 } = require('../utils/time');
+
+// JWT
+require('../utils/auth/strategies/jwt');
 
 function moviesApi(app) {
   const router = express.Router();
@@ -21,24 +25,29 @@ function moviesApi(app) {
 
   const moviesService = new MoviesService();
 
-  router.get('/', async function(req, res, next) {
-    cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
-    const { tags } = req.query;
+  router.get(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    async function(req, res, next) {
+      cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
+      const { tags } = req.query;
 
-    try {
-      const movies = await moviesService.getMovies({ tags });
+      try {
+        const movies = await moviesService.getMovies({ tags });
 
-      res.status(200).json({
-        data: movies,
-        message: 'movies listed'
-      });
-    } catch (err) {
-      next(err);
+        res.status(200).json({
+          data: movies,
+          message: 'movies listed',
+        });
+      } catch (err) {
+        next(err);
+      }
     }
-  });
+  );
 
   router.get(
     '/:movieId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ movieId: movieIdSchema }, 'params'),
     async function(req, res, next) {
       cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
@@ -49,7 +58,7 @@ function moviesApi(app) {
 
         res.status(200).json({
           data: movies,
-          message: 'movie retrieved'
+          message: 'movie retrieved',
         });
       } catch (err) {
         next(err);
@@ -57,23 +66,24 @@ function moviesApi(app) {
     }
   );
 
-  router.post('/', validationHandler(createMovieSchema), async function(
-    req,
-    res,
-    next
-  ) {
-    const { body: movie } = req;
-    try {
-      const createdMovieId = await moviesService.createMovie({ movie });
+  router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    validationHandler(createMovieSchema),
+    async function(req, res, next) {
+      const { body: movie } = req;
+      try {
+        const createdMovieId = await moviesService.createMovie({ movie });
 
-      res.status(201).json({
-        data: createdMovieId,
-        message: 'movie created'
-      });
-    } catch (err) {
-      next(err);
+        res.status(201).json({
+          data: createdMovieId,
+          message: 'movie created',
+        });
+      } catch (err) {
+        next(err);
+      }
     }
-  });
+  );
 
   router.put(
     '/:movieId',
@@ -86,12 +96,12 @@ function moviesApi(app) {
       try {
         const updatedMovieId = await moviesService.updateMovie({
           movieId,
-          movie
+          movie,
         });
 
         res.status(200).json({
           data: updatedMovieId,
-          message: 'movie updated'
+          message: 'movie updated',
         });
       } catch (err) {
         next(err);
@@ -101,6 +111,7 @@ function moviesApi(app) {
 
   router.delete(
     '/:movieId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ movieId: movieIdSchema }, 'params'),
     async function(req, res, next) {
       const { movieId } = req.params;
@@ -110,7 +121,7 @@ function moviesApi(app) {
 
         res.status(200).json({
           data: deletedMovieId,
-          message: 'movie deleted'
+          message: 'movie deleted',
         });
       } catch (err) {
         next(err);
