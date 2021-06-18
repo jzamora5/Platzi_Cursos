@@ -24,7 +24,7 @@ module.exports = {
     }
     return newCourse;
   },
-  createStudent: async (root, { input }) => {
+  createPerson: async (root, { input }) => {
     let db;
     let student;
 
@@ -53,7 +53,7 @@ module.exports = {
     }
     return course;
   },
-  editStudent: async (root, { _id, input }) => {
+  editPerson: async (root, { _id, input }) => {
     let db;
     let student;
 
@@ -80,7 +80,7 @@ module.exports = {
     return { result: 'Curso borrado exitosamente' };
   },
 
-  deleteStudent: async (root, { _id }) => {
+  deletePerson: async (root, { _id }) => {
     let db;
     try {
       db = await connectDB();

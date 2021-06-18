@@ -33,7 +33,7 @@ module.exports = {
 
     return course;
   },
-  getStudents: async () => {
+  getPeople: async () => {
     let db;
     let students = [];
 
@@ -46,7 +46,7 @@ module.exports = {
 
     return students;
   },
-  getStudent: async (root, args) => {
+  getPerson: async (root, args) => {
     let db;
     let student;
 
