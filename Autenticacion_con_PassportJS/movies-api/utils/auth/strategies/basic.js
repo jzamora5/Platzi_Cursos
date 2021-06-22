@@ -8,7 +8,6 @@ const UsersService = require('../../../services/users');
 passport.use(
   new BasicStrategy(async function(email, password, cb) {
     const userServices = new UsersService();
-
     try {
       const user = await userServices.getUser({ email });
 
