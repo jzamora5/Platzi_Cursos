@@ -7,7 +7,6 @@ export const ListOfPhotoCardsComponent = ({ data: { photos = [] } } = {}) => {
       {
         photos.map((photo) => <PhotoCard key={photo.id} {...photo} />)
       }
-
     </ul>
   )
 }

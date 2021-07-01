@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-closing-tag-location */
 import React from 'react'
 import { Logo } from './components/Logo'
-import { ListOfCategories } from './components/ListOfCategories'
-import { ListOfPhotoCards } from './container/ListOfPhotoCards'
 import { PhotoCardWithQuery } from './container/PhotoCardWithQuery'
-
+import { Home } from './pages/Home'
 import { GlobalStyle } from './styles/GlobalStyles'
+
+import { Router } from '@reach/router'
 
 export const App = () => {
   const urlParams = new window.URLSearchParams(window.location.search)
@@ -17,12 +18,11 @@ export const App = () => {
       {
         detailId
           ? <PhotoCardWithQuery id={detailId} />
-          : <>
-            <ListOfCategories />
-            <ListOfPhotoCards categoryId={1} />
-          </>
+          : <Router>
+            <Home path='/' />
+            <Home path='/pet/:categoryId' />
+          </Router>
       }
-
     </div>
   )
 }
