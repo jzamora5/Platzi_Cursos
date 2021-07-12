@@ -74,7 +74,7 @@ function userMoviesApi(app) {
       const { userMovieId } = req.params;
 
       try {
-        const deletedUserMovieId = await UserMovieService.deletedUserMovieId({
+        const deletedUserMovieId = await userMoviesService.deleteUserMovie({
           userMovieId,
         });
         res.status(200).json({

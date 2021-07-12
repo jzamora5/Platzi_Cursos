@@ -7,7 +7,10 @@ const UsersService = require('../services/users');
 const { config } = require('../config/index');
 const validationHandler = require('../utils/middleware/validationHandler');
 
-const { createUserSchema } = require('../utils/schemas/users');
+const {
+  createUserSchema,
+  createProviderUserSchema,
+} = require('../utils/schemas/users');
 
 // Basic strategy
 require('../utils/auth/strategies/basic');
@@ -84,6 +87,69 @@ function authApi(app) {
       next(error);
     }
   });
+
+  router.post(
+    '/sign-provider',
+    validationHandler(createProviderUserSchema),
+    async function(req, res, next) {
+      const { body } = req;
+      const { apiKeyToken, ...user } = body;
+      if (!apiKeyToken) {
+        next(boom.unauthorized('apiKeyToken is required'));
+      }
+      try {
+        const queriedUser = await usersService.getOrCreateUser({ user });
+        const apiKey = await apiKeysService.getApiKey({ token: apiKeyToken });
+
+        if (!apiKey) {
+          next(boom.unauthorized());
+        }
+
+        const { _id: id, name, email } = queriedUser;
+
+        const payload = {
+          sub: id,
+          name,
+          email,
+          scopes: apiKey.scopes,
+        };
+
+        const token = jwt.sign(payload, config.authJwtSecret, {
+          expiresIn: '15m',
+        });
+
+        return res.status(200).json({ token, user: { id, name, email } });
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
+
+  app.get(
+    '/auth/google',
+    passport.authenticate('google', {
+      scope: ['email', 'profile', 'openid'],
+    })
+  );
+
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { session: false }),
+    function(req, res, next) {
+      if (!req.user) {
+        next(boom.unauthorized());
+      }
+
+      const { token, ...user } = req.user;
+
+      res.cookie('token', token, {
+        httpOnly: !config.dev,
+        secure: !config.dev,
+      });
+
+      res.status(200).json(user);
+    }
+  );
 }
 
 module.exports = authApi;

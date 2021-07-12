@@ -13,17 +13,17 @@ class UserMoviesService {
     return userMovies || [];
   }
 
-  async createUserMovie({ userMovieId }) {
+  async createUserMovie({ userMovie }) {
     const createdUserMovieId = await this.mongoDB.create(
       this.collection,
-      userMovieId
+      userMovie
     );
 
     return createdUserMovieId;
   }
 
   async deleteUserMovie({ userMovieId }) {
-    const deletedUserMovieId = await this.mongoDB.create(
+    const deletedUserMovieId = await this.mongoDB.delete(
       this.collection,
       userMovieId
     );
