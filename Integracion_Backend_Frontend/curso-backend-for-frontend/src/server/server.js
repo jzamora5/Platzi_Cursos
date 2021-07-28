@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../frontend/reducers';
 import Layout from '../frontend/components/Layout';
-import initialState from '../frontend/initialState';
+// import initialState from '../frontend/initialState';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import getManifest from './getManifest';
 
@@ -80,8 +80,33 @@ const setResponse = (html, preloadedState, manifest) => {
 };
 
 const renderApp = (req, res) => {
+  let initialState;
+
+  const { email, name, id } = req.cookies;
+
+  if (id) {
+    initialState = {
+      user: {
+        email,
+        name,
+        id,
+      },
+      myList: [],
+      trends: [],
+      originals: [],
+    };
+  } else {
+    initialState = {
+      user: {},
+      myList: [],
+      trends: [],
+      originals: [],
+    };
+  }
+
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
+  const isLogged = initialState.user.Id;
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
@@ -99,21 +124,21 @@ app.post('/auth/sign-in', async function (req, res, next) {
         next(boom.unauthorized());
       }
 
-      req.login(data, { session: false }, async function (error) {
-        if (error) {
-          next(error);
+      req.login(data, { session: false }, async function (err) {
+        if (err) {
+          next(err);
         }
 
         const { token, ...user } = data;
 
         res.cookie('token', token, {
-          httpOnly: !config.dev,
-          secure: !config.dev,
+          httpOnly: !(ENV === 'development'),
+          secure: !(ENV === 'development'),
         });
 
         res.status(200).json(user);
       });
-    } catch (error) {
+    } catch (err) {
       next(error);
     }
   })(req, res, next);
