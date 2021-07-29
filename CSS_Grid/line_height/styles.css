@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+.wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  font-family: "Lato", sans-serif;
+  width: 550px;
+}
+
+.container, .container1, .container2, .container3 {
+  background: turquoise;
+  width: 180px;
+  height: 180px;
+}
+
+.element, .element1, .element2, .element3, .element4, .element5, .element6, .element7, .element8, .element9 {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  padding-top: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container1 {
+  text-align: left;
+  line-height: 180px;
+}
+
+.element1 {
+  background: papayawhip;
+  display: inline-block;
+  line-height: 45px;
+  vertical-align: top;
+}
+
+.element2 {
+  background: papayawhip;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.element3 {
+  background: papayawhip;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: bottom;
+}
+
+.container2 {
+  text-align: center;
+  line-height: 180px;
+}
+
+.element4 {
+  background: pink;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.element5 {
+  background: pink;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.element6 {
+  background: pink;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: bottom;
+}
+
+.container3 {
+  text-align: right;
+  line-height: 180px;
+}
+
+.element7 {
+  background: lightcyan;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.element8 {
+  background: lightcyan;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.element9 {
+  background: lightcyan;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: bottom;
+}
+/*# sourceMappingURL=styles.css.map */
