@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+.element {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.element1 {
+  @extend .element;
+  background: papayawhip;
+  display: inline-block;
+}
+
+.element2 {
+  @extend .element;
+  background: pink;
+  display: inline-block;
+}
+
+.element3 {
+  @extend .element;
+  background: lightcyan;
+  display: inline-block;
+}
+
+.container {
+  background: turquoise;
+  border: 1px solid white;
+  width: 180px;
+  height: 180px;
+}
+
+.container1 {
+  @extend .container;
+  display: table-cell;
+  text-align: left;
+  vertical-align: top;
+}
+
+.container2 {
+  @extend .container;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.container3 {
+  @extend .container;
+  display: table-cell;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.container4 {
+  @extend .container;
+  display: table-cell;
+  text-align: center;
+  vertical-align: top;
+}
+
+.container5 {
+  @extend .container;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.container6 {
+  @extend .container;
+  display: table-cell;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.container7 {
+  @extend .container;
+  display: table-cell;
+  text-align: right;
+  vertical-align: top;
+}
+
+.container8 {
+  @extend .container;
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.container9 {
+  @extend .container;
+  display: table-cell;
+  text-align: right;
+  vertical-align: bottom;
+}
