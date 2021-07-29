@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions';
+import { loginUser } from "../actions";
 import '../assets/styles/components/Login.scss';
 import Header from '../components/Header';
 import googleIcon from '../assets/static/google-icon.png';
 import twitterIcon from '../assets/static/twitter-icon.png';
 
-const Login = (props) => {
+const Login = props => {
   const [form, setValues] = useState({
     email: '',
     id: '',
     name: '',
   });
 
-  const updateInput = (event) => {
+  const updateInput = event => {
     setValues({
       ...form,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     props.loginUser(form, '/');
-  };
+  }
 
   return (
     <>
@@ -48,9 +48,7 @@ const Login = (props) => {
               placeholder="Contraseña"
               onChange={updateInput}
             />
-            <button className="button" type="submit">
-              Iniciar sesión
-            </button>
+            <button className="button" type="submit">Iniciar sesión</button>
             <div className="login__container--remember-me">
               <label htmlFor="first_checkbox">
                 <input type="checkbox" id="cbox1" value="first_checkbox" />
@@ -61,20 +59,28 @@ const Login = (props) => {
           </form>
           <section className="login__container--social-media">
             <div>
-              <img src={googleIcon} alt="Google" /> Inicia sesión con Google
+              <img src={googleIcon} alt="Google" />
+              {' '}
+              Inicia sesión con Google
             </div>
             <div>
-              <img src={twitterIcon} alt="Twitter" /> Inicia sesión con Twitter
+              <img src={twitterIcon} alt="Twitter" />
+              {' '}
+              Inicia sesión con Twitter
             </div>
           </section>
           <p className="login__container--register">
-            No tienes ninguna cuenta <Link to="/register">Regístrate</Link>
+            No tienes ninguna cuenta
+            {' '}
+            <Link to="/register">
+              Regístrate
+            </Link>
           </p>
         </section>
       </section>
     </>
   );
-};
+}
 
 const mapDispatchToProps = {
   loginUser,

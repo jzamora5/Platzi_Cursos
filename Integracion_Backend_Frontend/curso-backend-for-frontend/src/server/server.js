@@ -10,16 +10,15 @@ import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from '../frontend/reducers';
-import Layout from '../frontend/components/Layout';
-// import initialState from '../frontend/initialState';
-import serverRoutes from '../frontend/routes/serverRoutes';
-import getManifest from './getManifest';
-
 import cookieParser from 'cookie-parser';
 import boom from '@hapi/boom';
 import passport from 'passport';
 import axios from 'axios';
+import reducer from '../frontend/reducers';
+import Layout from '../frontend/components/Layout';
+import serverRoutes from '../frontend/routes/serverRoutes';
+import getManifest from './getManifest';
+
 
 dotenv.config();
 
@@ -55,7 +54,8 @@ const setResponse = (html, preloadedState, manifest) => {
   const mainStyles = manifest ? manifest['main.css'] : '/assets/app.css';
   const mainBuild = manifest ? manifest['main.js'] : '/assets/app.js';
   const vendorBuild = manifest ? manifest['vendors.js'] : 'assets/vendor.js';
-  return `
+  return (
+    `
       <!DOCTYPE html>
       <html lang="es">
         <head>
@@ -69,56 +69,60 @@ const setResponse = (html, preloadedState, manifest) => {
         <body>
           <div id="app">${html}</div>
           <script id="preloadedState">
-            window.__PRELOADED_STATE__ = ${JSON.stringify(
-              preloadedState
-            ).replace(/</g, '\\u003c')}
+            window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
           </script>
           <script src="${mainBuild}" type="text/javascript"></script>
           <script src="${vendorBuild}" type="text/javascript"></script>
         </body>
-      </html>`;
+      </html>`
+  );
 };
 
-const renderApp = (req, res) => {
+const renderApp = async (req, res) => {
   let initialState;
+  const { token, email, name, id } = req.cookies;
 
-  const { email, name, id } = req.cookies;
-
-  if (id) {
+  try {
+    let movieList = await axios({
+      url: `${process.env.API_URL}/api/movies`,
+      headers: { Authorization: `Bearer ${token}`},
+      method: 'get',
+    });
+    movieList = movieList.data.data;
     initialState = {
       user: {
-        email,
-        name,
-        id,
+        id, email, name,
       },
       myList: [],
-      trends: [],
-      originals: [],
+      trends: movieList.filter(movie => movie.contentRating === 'PG' &&movie._id),
+      originals: movieList.filter(movie => movie.contentRating === 'G'&& movie._id)
     };
-  } else {
+  } catch (err) {
     initialState = {
       user: {},
       myList: [],
       trends: [],
-      originals: [],
-    };
+      originals: []
+    }
   }
 
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
-  const isLogged = initialState.user.Id;
+  const isLogged = (initialState.user.id);
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
-        <Layout>{renderRoutes(serverRoutes)}</Layout>
+        <Layout>
+          {renderRoutes(serverRoutes(isLogged))}
+        </Layout>
       </StaticRouter>
     </Provider>
-  );
+  )
   res.send(setResponse(html, preloadedState, req.hashManifest));
 };
 
-app.post('/auth/sign-in', async function (req, res, next) {
-  passport.authenticate('basic', function (error, data) {
+app.post("/auth/sign-in", async function (req, res, next) {
+  passport.authenticate("basic", function (error, data) {
     try {
       if (error || !data) {
         next(boom.unauthorized());
@@ -131,40 +135,42 @@ app.post('/auth/sign-in', async function (req, res, next) {
 
         const { token, ...user } = data;
 
-        res.cookie('token', token, {
+        res.cookie("token", token, {
           httpOnly: !(ENV === 'development'),
-          secure: !(ENV === 'development'),
+          secure: !(ENV === 'development')
         });
 
         res.status(200).json(user);
       });
     } catch (err) {
-      next(error);
+      next(err);
     }
   })(req, res, next);
 });
 
-app.post('/auth/sign-up', async function (req, res, next) {
+app.post("/auth/sign-up", async function (req, res, next) {
   const { body: user } = req;
+
   try {
     const userData = await axios({
       url: `${process.env.API_URL}/api/auth/sign-up`,
-      method: 'post',
+      method: "post",
       data: {
-        email: user.email,
-        name: user.name,
-        password: user.password,
-      },
+        'email': user.email,
+        'name': user.name,
+        'password': user.password
+      }
     });
     res.status(201).json({
       name: req.body.name,
       email: req.body.email,
-      id: userData.data.id,
+      id: userData.data.id
     });
   } catch (error) {
     next(error);
   }
 });
+
 
 app.get('*', renderApp);
 
