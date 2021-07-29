@@ -30,7 +30,7 @@ const serverRoutes = (isLogged) => {
       name: 'NotFount',
       component: NotFount,
     },
-  ];
-};
+  ]
+}
 
-export default serverRoutes();
+export default serverRoutes;
