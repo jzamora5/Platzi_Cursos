@@ -1,0 +1,37 @@
+:root {
+  --skin: #f6c09c;
+  --background: #ed4042;
+  --red: #ed2860;
+  --dark-red: #680524;
+  --black: #00243a;
+  --white: #fff;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.head {
+  width: 100px;
+  height: 200px;
+  background: var(--skin);
+  border-radius: 50px;
+  position: relative;
+}
+
+.eye-left {
+  width: 20px;
+  height: 20px;
+  background: var(--white);
+  position: absolute;
+  top: 80px;
+  border-radius: 50%;
+  left: 30px;
+}
