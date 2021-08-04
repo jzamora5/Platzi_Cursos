@@ -78,6 +78,11 @@
   "jest": {
     "setupFilesAfterEnv": [
       "<rootDir>/src/frontend/__test__/setupTest.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif)$": "<rootDir>/src/frontend/__mocks__/fileMock.js",
+      "\\.(scss|css|sass)$": "<rootDir>/src/frontend/__mocks__/styleMock.js"
+    },
+    "testEnvironment": "jsdom"
   }
 }
