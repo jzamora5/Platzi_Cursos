@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  font-family: "Lato", sans-serif;
+  width: 550px;
+}
+
+.container {
+  background: turquoise;
+  width: 180px;
+  height: 180px;
+}
+
+.element {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.element1 {
+  @extend .element;
+  background: papayawhip;
+}
+
+.element2 {
+  @extend .element;
+  background: pink;
+}
+
+.element3 {
+  @extend .element;
+  background: lightcyan;
+}
+
+.container1 {
+  @extend .container;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.container2 {
+  @extend .container;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container3 {
+  @extend .container;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.container4 {
+  @extend .container;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container5 {
+  @extend .container;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container6 {
+  @extend .container;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.container7 {
+  @extend .container;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.container8 {
+  @extend .container;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.container9 {
+  @extend .container;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
