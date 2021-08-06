@@ -1,0 +1,21 @@
+.grid-container {
+  border: 4px dotted turquoise;
+  display: grid;
+  justify-content: end;
+  width: 200px;
+  height: 200px;
+}
+
+.container {
+  background: papayawhip;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  width: 100px;
+  height: 100px;
+}
+
+.item {
+  background: papayawhip;
+  border: 4px solid hotpink;
+}
