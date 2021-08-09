@@ -1,0 +1,17 @@
+.container {
+  background: papayawhip;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+  /* grid-template-columns: repeat(auto-fill, minmax(20px, 1fr)); */
+}
+
+.item {
+  background: papayawhip;
+  border: 4px solid hotpink;
+  width: 100%;
+  height: 50px;
+}
+
+body {
+  margin: 0;
+}
