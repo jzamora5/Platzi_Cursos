@@ -1,0 +1,62 @@
+.container-one {
+  background: papayawhip;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "card-1 card-2"
+    "card-1 card-3";
+  width: 120px;
+}
+
+.item-one {
+  background: hotpink;
+  height: 60px;
+  width: 80px;
+  grid-area: card-1;
+}
+
+.item-two {
+  background: turquoise;
+  width: 60px;
+  height: 30px;
+  grid-area: card-2;
+}
+
+.item-three {
+  background: lightsalmon;
+  width: 60px;
+  height: 30px;
+  grid-area: card-3;
+}
+
+.container-two {
+  background: papayawhip;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2;
+  grid-template-areas:
+    "card-4 card-5"
+    "card-6 card-6";
+  width: 120px;
+}
+
+.item-four {
+  background: turquoise;
+  width: 60px;
+  height: 30px;
+  grid-area: card-4;
+}
+
+.item-five {
+  background: lightsalmon;
+  width: 60px;
+  height: 30px;
+  grid-area: card-5;
+}
+
+.item-six {
+  background: hotpink;
+  width: 120px;
+  height: 60px;
+  grid-area: card-6;
+}
