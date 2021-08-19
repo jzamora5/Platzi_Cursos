@@ -1,0 +1,31 @@
+nav {
+  background-color: pink;
+  width: 70px;
+}
+
+ul {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  list-style: none;
+  padding: 10px;
+}
+
+li {
+  display: grid;
+  justify-self: center;
+  align-self: center;
+  padding: 20px 0px;
+}
+
+img {
+  justify-self: center;
+  width: 30px;
+}
+
+p {
+  margin: 0px;
+}
+
+.item {
+  width: 50px;
+}
