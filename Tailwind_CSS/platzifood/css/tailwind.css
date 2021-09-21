@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.alert {
+  @apply bg-gray-400 text-white font-bold p-4 m-6;
+}
+
+.alert-danger {
+  @apply bg-red-400;
+}
+
+.alert-warning {
+  @apply bg-yellow-400;
+}
+
+.alert-info {
+  @apply bg-blue-400;
+}
+
 @responsive {
   .rotate-45 {
     transform: rotate(45deg);
