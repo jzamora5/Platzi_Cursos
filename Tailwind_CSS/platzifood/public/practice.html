@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="m-6">
+    <div class="my-6">
+      <h1 class="mb-3 font-bold">Colores y Dimensiones</h1>
+      <button class="w-screen md:w-auto bg-blue-500 px-6 py-1 text-white">
+        Submit
+      </button>
+    </div>
+
+    <div class="my-6">
+      <h1 class="mb-3 font-bold">Display y Flexbox</h1>
+      <div class="flex justify-around">
+        <button class="bg-blue-500 px-6 py-1 text-white mr-2">Submit</button>
+        <button class="bg-blue-500 px-6 py-1 text-white mr-2">Submit</button>
+        <button class="bg-blue-500 px-6 py-1 text-white mr-2">Submit</button>
+      </div>
+    </div>
+
+    <div class="my-6">
+      <h1 class="mb-3 font-bold">Pseudo-Class Variants</h1>
+      <div class="flex justify-around">
+        <button
+          class="
+            bg-blue-500
+            hover:bg-blue-200 hover:text-black
+            px-6
+            py-1
+            text-white
+            mr-2
+          "
+        >
+          Submit
+        </button>
+        <button
+          disabled
+          class="disabled:opacity-25 bg-blue-500 px-6 py-1 text-white mr-2"
+        >
+          Submit
+        </button>
+        <button
+          class="focus:bg-green-400 bg-blue-500 px-6 py-1 text-white mr-2"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <div class="my-6">
+      <h1 class="mb-3 font-bold">Pseudo-Class Variants</h1>
+      <div>
+        <div class="alert">Este mensaje es una alerta default.</div>
+
+        <div class="alert alert-danger">Este mensaje es una alerta danger.</div>
+
+        <div class="alert alert-warning">
+          Este mensaje es una alerta warning.
+        </div>
+
+        <div class="alert alert-info">Este mensaje es una alerta info.</div>
+      </div>
+    </div>
+  </body>
+</html>
