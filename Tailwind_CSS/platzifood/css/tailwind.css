@@ -28,7 +28,7 @@
   px-4
   bg-gray-400
   block
-  mx-auto hover:shadow-none hover:bg-gray-700 hover:text-white;
+  hover:shadow-none hover:bg-gray-700 hover:text-white;
 }
 
 .btn-primary {
