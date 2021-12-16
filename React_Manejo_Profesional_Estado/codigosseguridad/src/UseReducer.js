@@ -1,4 +1,5 @@
 import React from "react";
+import { act } from "react-dom/cjs/react-dom-test-utils.development";
 
 const initialState = {
   value: "",
@@ -6,6 +7,15 @@ const initialState = {
   loading: false,
   deleted: false,
   confirmed: false,
+};
+
+const actionTypes = {
+  confirm: "CONFIRM",
+  error: "ERROR",
+  write: "WRITE",
+  check: "CHECK",
+  delete: "DELETE",
+  reset: "RESET",
 };
 
 // const reducer = (state, action) => {
@@ -49,30 +59,30 @@ const reducerSwitch = (state, action) => {
 };
 
 const reducerObject = (state, action) => ({
-  CONFIRM: {
+  [actionTypes.confirm]: {
     ...state,
     error: false,
     loading: false,
     confirmed: true,
   },
-  ERROR: {
+  [actionTypes.error]: {
     ...state,
     error: true,
     loading: false,
   },
-  WRITE: {
+  [actionTypes.write]: {
     ...state,
     value: action.payload,
   },
-  CHECK: {
+  [actionTypes.check]: {
     ...state,
     loading: true,
   },
-  DELETE: {
+  [actionTypes.delete]: {
     ...state,
     deleted: true,
   },
-  RESET: {
+  [actionTypes.reset]: {
     ...state,
     confirmed: false,
     deleted: false,
@@ -89,6 +99,19 @@ const SECURITY_CODE = "paradigma";
 const UseReducer = ({ name }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
+  const onConfirm = () => dispatch({ type: actionTypes.confirm });
+  const onError = () => dispatch({ type: actionTypes.error });
+  const onCheck = () => dispatch({ type: actionTypes.check });
+  const onDelete = () => dispatch({ type: actionTypes.delete });
+  const onReset = () => dispatch({ type: actionTypes.reset });
+
+  const onWrite = ({ target: { value } }) => {
+    dispatch({
+      type: actionTypes.write,
+      payload: value,
+    });
+  };
+
   console.log(`state`, state);
 
   React.useEffect(() => {
@@ -99,13 +122,9 @@ const UseReducer = ({ name }) => {
         console.log("Haciendo la validación");
 
         if (state.value === SECURITY_CODE) {
-          dispatch({
-            type: "CONFIRM",
-          });
+          onConfirm();
         } else {
-          dispatch({
-            type: "ERROR",
-          });
+          onError();
         }
 
         console.log("Terminando la validación la validación");
@@ -127,61 +146,24 @@ const UseReducer = ({ name }) => {
         <input
           placeholder="Código de Seguridad"
           value={state.value}
-          onChange={(event) => {
-            dispatch({
-              type: "WRITE",
-              payload: event.target.value,
-            });
-          }}
+          onChange={onWrite}
         />
-        <button
-          onClick={() => {
-            dispatch({
-              type: "CHECK",
-            });
-          }}
-        >
-          Comprobar
-        </button>
+        <button onClick={onCheck}>Comprobar</button>
       </div>
     );
   } else if (!!state.confirmed && !state.deleted) {
     return (
       <>
         <p>Pedimos confirmación. ¿Estas seguro?</p>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "DELETE",
-            });
-          }}
-        >
-          Sí, eliminar
-        </button>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "RESET",
-            });
-          }}
-        >
-          No, me arrepentí
-        </button>
+        <button onClick={onDelete}>Sí, eliminar</button>
+        <button onClick={onReset}>No, me arrepentí</button>
       </>
     );
   } else {
     return (
       <>
         <p>Eliminado con éxito</p>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "RESET",
-            });
-          }}
-        >
-          Resetear, volver atrás
-        </button>
+        <button onClick={onReset}>Resetear, volver atrás</button>
       </>
     );
   }
