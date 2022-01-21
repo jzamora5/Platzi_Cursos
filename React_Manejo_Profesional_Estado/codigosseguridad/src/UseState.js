@@ -62,7 +62,7 @@ const UseState = ({ name }) => {
     });
   };
 
-  console.log(`state`, state);
+  // console.log(`state`, state);
 
   React.useEffect(() => {
     console.log("Empezando el efecto");
