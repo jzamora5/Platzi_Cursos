@@ -92,12 +92,25 @@ function createStudent({
       instagram,
       facebook,
     },
-    readName(newName) {
+
+    get name() {
       return private._name;
     },
-    changeName(newName) {
-      private._name = newName;
+
+    set name(newName) {
+      if (newName.length !== 0) {
+        private._name = newName;
+      } else {
+        console.warn("Tu nombre debe tener almenos 1 caracter");
+      }
     },
+
+    // readName(newName) {
+    //   return private._name;
+    // },
+    // changeName(newName) {
+    //   private._name = newName;
+    // },
   };
 
   Object.defineProperty(public, "readName", {
