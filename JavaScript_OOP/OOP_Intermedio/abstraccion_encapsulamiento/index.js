@@ -68,6 +68,21 @@ function requiredParam(param) {
   throw new Error(param + " es obligatorio");
 }
 
+function createLearningPath({ name = requiredParam("name"), courses = [] }) {
+  const private = {
+    _name: name,
+    _courses: courses,
+  };
+
+  const public = {
+    get courses() {
+      return private._courses;
+    },
+  };
+
+  return public;
+}
+
 function createStudent({
   name = requiredParam("name"),
   age,
@@ -80,13 +95,13 @@ function createStudent({
 } = {}) {
   const private = {
     _name: name,
+    _learningPaths: learningPaths,
   };
 
   const public = {
     age,
     email,
     approvedCourses,
-    learningPaths,
     socialMedia: {
       twitter,
       instagram,
@@ -103,6 +118,29 @@ function createStudent({
       } else {
         console.warn("Tu nombre debe tener almenos 1 caracter");
       }
+    },
+
+    get learningPaths() {
+      return private._learningPaths;
+    },
+
+    set learningPaths(newLP) {
+      if (!newLP.name) {
+        console.warn("Tu LP no tiene la propiedad nombre");
+        return;
+      }
+
+      if (!newLP.courses) {
+        console.warn("Tu LP no tiene courses");
+        return;
+      }
+
+      if (!isArray(newLP.courses)) {
+        console.warn("Tu LP no  es una lista de cursos");
+        return;
+      }
+
+      private._learningPaths.push(newLP);
     },
 
     // readName(newName) {
