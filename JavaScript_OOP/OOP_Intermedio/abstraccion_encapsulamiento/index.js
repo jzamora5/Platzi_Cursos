@@ -108,14 +108,27 @@ function Student({
   approvedCourses = [],
   learningPaths = [],
 } = {}) {
-  if (isArray(learningPaths)) {
-    this.learningPaths = [];
+  const private = {
+    _learningPaths: [],
+  };
 
-    for (learningPath of learningPaths) {
-      if (learningPath instanceof LearningPath) {
-        this.learningPaths.push(learningPath);
+  Object.defineProperty(this, "learningPaths", {
+    get() {
+      return private._learningPaths;
+    },
+    set(newLp) {
+      if (newLp instanceof LearningPath) {
+        private._learningPaths.push(newLp);
+      } else {
+        console.warn(
+          "Alguno de los LPs no es una instancia del prototipo LearningPaths"
+        );
       }
-    }
+    },
+  });
+
+  for (learningPathIndex in learningPaths) {
+    this.learningPaths = learningPaths[learningPathIndex];
   }
 
   this.name = name;
