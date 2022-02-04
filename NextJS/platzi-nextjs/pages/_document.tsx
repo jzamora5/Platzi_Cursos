@@ -1,20 +1,14 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
-  // static async getInitialProps(ctx) {
-  //   // para todas las paginas
-  //   const initialProps = await Document.getInitialProps(ctx)
-  //   return { ...initialProps }
-  // }
-
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
-          {/* favicon */}
-          {/* Webfont */}
-          {/* stylesheet */}
-          {/* script/js */}
+          {/** FavIcon */}
+          {/** WebFont */}
+          {/** stylesheets */}
+          {/** scripts */}
         </Head>
         <body className="my-body-class">
           <Main />
