@@ -10,11 +10,14 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.13",
     "cors": "^2.8.5",
+    "express": "^4.17.2",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.4.2",
     "react": "^16.13.1",
