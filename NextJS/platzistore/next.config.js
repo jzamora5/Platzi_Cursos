@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   env: {
-    customKey: 'customValue'
+    customKey: 'customValue',
   },
   basePath: '/dist',
   compress: true,
@@ -9,9 +9,9 @@ module.exports = {
     return [
       {
         source: '/hola',
-        destination: '/hello',
-        permantent: true
+        destination: 'https://gndx.dev',
+        permanent: true,
       }
     ]
   }
-};
+}
