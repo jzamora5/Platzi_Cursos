@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import OrderItem from '@components/OrderItem';
-import AppContext from '../context/AppContext';
-// import '@styles/MyOrder.scss';
+import AppContext from '@context/AppContext';
 import arrow from '@icons/flechita.svg';
-import styles from '@styles/MyOrder.module.scss'
+import styles from '@styles/MyOrder.module.scss';
 
 const MyOrder = () => {
 	const { state, toggleOrder } = useContext(AppContext);
@@ -16,24 +15,24 @@ const MyOrder = () => {
 
 	return (
 		<aside className={styles.MyOrder}>
-			<div className="MyOrder-container">
-				<div className="title-container">
-					<img className="more-clickable-area pointer" src={arrow} alt="arrow" onClick={() => toggleOrder()} />
-					<p className="title">My order</p>
+			<div className={styles['MyOrder-container']}>
+				<div className={styles['title-container']}>
+					<img className={styles['more-clickable-area'], styles.pointer} src={arrow} alt="arrow" onClick={() => toggleOrder()} />
+					<p className={styles.title}>My order</p>
 				</div>
-				<div className="my-order-content">
-					<div className="my-orders">
+				<div className={styles['my-order-content']}>
+					<div className={styles['my-orders']}>
 						{state.cart.map((product) => (
 							<OrderItem product={product} key={`orderItem-${product.id}`} />
 						))}
 					</div>
-					<div className="order">
+					<div className={styles.order}>
 						<p>
 							<span>Total</span>
 						</p>
 						<p>${sumTotal()}</p>
 					</div>
-					<button className="primary-button">
+					<button className={styles['primary-button']}>
 						Checkout
 					</button>
 				</div>

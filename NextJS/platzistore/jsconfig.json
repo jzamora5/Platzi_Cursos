@@ -20,12 +20,12 @@
       "@context/*": [
         "context/*"
       ],
+      "@styles/*": [
+        "styles/*"
+      ],
       "@hooks/*": [
         "hooks/*"
       ],
-      "@styles/*": [
-        "styles/*"
-      ]
     }
   }
 }
