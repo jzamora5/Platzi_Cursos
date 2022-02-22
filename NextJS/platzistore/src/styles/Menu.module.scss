@@ -1,7 +1,7 @@
 @import 'vars';
 
 .Menu {
-  width: 100px;
+  width: 170px;
   height: auto;
   border: 1px solid $--very-light-pink;
   border-radius: 6px;
@@ -10,6 +10,7 @@
   top: 60px;
   right: 50px;
   background-color: white;
+  z-index: 1;
 }
 .Menu ul {
   list-style: none;

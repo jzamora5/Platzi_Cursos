@@ -9,7 +9,7 @@
     "lint:fix": "eslint src/ --fix"
   },
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^0.24.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^4.0.0",
