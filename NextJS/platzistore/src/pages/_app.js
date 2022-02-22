@@ -1,17 +1,24 @@
-import '../styles/globals.css';
 import Header from '@components/Header';
+import Script from 'next/script';
 import AppContext from '@context/AppContext';
 import useInitialState from '@hooks/useInitialState';
-import Head from 'next/head';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   const initialState = useInitialState();
   return (
     <>
-      <Head>
-        <title>React Shop</title>
-      </Head>
       <AppContext.Provider value={initialState}>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-EKGXPF331F" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-EKGXPF331F');
+          `}
+        </Script>
         <Header />
         <Component {...pageProps} />
       </AppContext.Provider>
