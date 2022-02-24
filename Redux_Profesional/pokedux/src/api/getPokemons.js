@@ -1,7 +1,4 @@
-import axiosInstance from "./config";
+import axios from "../services/axios";
 
 export const getPokemons = (limit = 151) =>
-  axiosInstance
-    .get(`/pokemon?limit=${limit}`)
-    .then((response) => response.data)
-    .catch((error) => console.log(error));
+  axios.get(`/pokemon?limit=${limit}`).then((response) => response.data);

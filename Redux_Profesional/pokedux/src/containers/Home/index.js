@@ -7,6 +7,7 @@ import "./styles.css";
 import { getPokemons } from "../../api/getPokemons";
 import { setPokemon } from "../../actions/index";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 // const mapStateToProps = (state) => ({
 //   list: state.list,
@@ -17,20 +18,30 @@ import { useSelector } from "react-redux";
 // });
 
 function Home() {
-  const dispatch = useDispatch()
-  const list = useSelector(state => state.list)
+  const dispatch = useDispatch();
+  const list = useSelector((state) => state.list);
 
   useEffect(() => {
-    getPokemons().then((res) => dispatch(setPokemon(res.results)));
+    getPokemons()
+      .then((res) => {
+        const pokemonList = res.results;
+        return Promise.all(
+          pokemonList.map((pokemon) => axios.get(pokemon.url))
+        );
+      })
+      .then((pokemonsResponse) => {
+        const pokemonsData = pokemonsResponse.map((response) => response.data);
+        dispatch(setPokemon(pokemonsData));
+      });
   }, []);
 
   return (
     <div className="Home">
       <Searcher />
-      <PokemonList pokemons={list}/>
+      <PokemonList pokemons={list} />
     </div>
   );
 }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Home);
-export default Home
+export default Home;
