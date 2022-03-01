@@ -1,7 +1,7 @@
-import { SET_ERROR } from "../actions/types";
+import { SET_ERROR } from '../actions/types';
 
-export const logActions = (store) => (next) => (actionInfo) => {
-  console.log("disparando:", actionInfo);
+export const logAction = (store) => (next) => (actionInfo) => {
+  console.log('dispatching', actionInfo);
   next(actionInfo);
 };
 
