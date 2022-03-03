@@ -1,13 +1,13 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { Message } from 'semantic-ui-react';
-import { clearError } from '../../actions';
-import Menu from '../Menu';
-import './styles.css';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Message } from "semantic-ui-react";
+import { clearError } from "../../actions";
+import Menu from "../Menu";
+import "./styles.css";
 
 const Layout = ({ children }) => {
-  const errorMessage = useSelector((state) => state.error);
+  const errorMessage = useSelector((state) => state.get("error"));
   const dispatch = useDispatch();
 
   const handleDismiss = () => {
@@ -18,15 +18,15 @@ const Layout = ({ children }) => {
     <div>
       <Menu />
       {errorMessage && (
-        <div className='wrapper'>
+        <div className="wrapper">
           <Message
             onDismiss={handleDismiss}
             content={errorMessage}
-            color='red'
+            color="red"
           />
         </div>
       )}
-      <div className='Layout-content'>{children}</div>
+      <div className="Layout-content">{children}</div>
     </div>
   );
 };
