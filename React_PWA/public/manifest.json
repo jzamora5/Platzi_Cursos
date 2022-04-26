@@ -1,0 +1,19 @@
+{
+  "short_name": "Recetas",
+  "name": "Platzi Recetas",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "prefer_related_applications": false,
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#ffa500",
+  "background_color": "#ffffff",
+  "related_applications": []
+}
