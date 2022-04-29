@@ -33,4 +33,4 @@ yarn-error.log*
 # vercel
 .vercel
 
-./import/*
+import/config.json
