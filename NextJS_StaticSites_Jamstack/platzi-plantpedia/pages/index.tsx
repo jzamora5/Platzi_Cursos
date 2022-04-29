@@ -1,9 +1,19 @@
+import { useEffect } from 'react'
 import { Grid } from '@ui/Grid'
 import { Button } from '@ui/Button'
 import { Typography } from '@ui/Typography'
 import { Layout } from '@components/Layout'
+import { getPlantList } from '@api'
 
 export default function Home() {
+  useEffect(() => {
+    getPlantList({limit: 10}).then(data => {
+      data.forEach(item => {
+        console.log(item.author.fullName)
+      })
+    })
+  }, [])
+
   return (
     <Layout>
       <Typography variant="h2" className="text-center">
@@ -11,8 +21,8 @@ export default function Home() {
       </Typography>
       <div className="max-w-5xl mx-auto my-10">
         <Grid component="ul" container spacing={2}>
-          {documentationList.map((doc) => (
-            <Grid component="li" item className="" xs={6}>
+          {documentationList.map((doc, idx) => (
+            <Grid component="li" item className="" xs={6} key={idx}>
               <a
                 href={doc.link}
                 target="_blank"
