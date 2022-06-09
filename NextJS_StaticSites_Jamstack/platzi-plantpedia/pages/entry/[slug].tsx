@@ -10,6 +10,7 @@ import { Grid } from '@ui/Grid'
 import { RichText } from '@components/RichText'
 import { AuthorCard } from '@components/AuthorCard'
 import { PlantEntryInline } from '@components/PlantCollection'
+import { useRouter } from 'next/dist/client/router'
 
 type PlantEntryPageProps = {
   plant: Plant
@@ -71,9 +72,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-
+    // 404
+    // fallback: false,
+    //
     // Block until the server gets its data. Like in Server side rendering
-    fallback: 'blocking',
+    // wait until HTTP is done
+    // fallback: 'blocking',
+    //
+    // let the component handle it
+    fallback: true,
   }
 }
 
@@ -82,6 +89,14 @@ export default function PlantEntryPage({
   otherEntries,
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter()
+
+  if (router.isFallback) {
+    // Next.js está cargando
+
+    return <Layout>Loading awesomeness...</Layout>
+  }
+
   return (
     <Layout>
       <Grid container spacing={4}>
