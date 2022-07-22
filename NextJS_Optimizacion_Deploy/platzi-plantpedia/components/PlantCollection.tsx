@@ -1,3 +1,4 @@
+import NextImage, { ImageLoaderProps } from 'next/image'
 import Link from 'next/link'
 import { Grid, GridProps } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
@@ -49,12 +50,62 @@ export function PlantEntry({ plant, variant = 'square' }: PlantEntryType) {
   )
 }
 
+const aspectRatioToRatio = {
+  '1:1': 1,
+  '4:3': 3 / 4,
+  '16:9': 9 / 19,
+}
+
+function calcAspectRatio(
+  aspectRatio: '1:1' | '4:3' | '16:9',
+  width: number
+): number {
+  const ratio = aspectRatioToRatio[aspectRatio]
+
+  return Math.floor(width * ratio)
+}
+
+type ImageProps = {
+  layout: 'responsive' | 'fixed' | 'intrinsic' | undefined
+  src: string
+  width: number
+  height?: never
+  aspectRatio: '1:1' | '4:3' | '16:9'
+  fit?: 'pad' | 'fill' | 'crop' | 'scale'
+}
+
+function Image({ layout, src, width, aspectRatio, fit = 'scale' }: ImageProps) {
+  const height = calcAspectRatio(aspectRatio, width)
+
+  const loader = (args: ImageLoaderProps): string => {
+    const loaderHeight = calcAspectRatio(aspectRatio, args.width)
+
+    return `${args.src}?w=${width}&h=${loaderHeight}&fit=${fit}`
+  }
+
+  return (
+    <NextImage
+      layout={layout}
+      src={src}
+      width={width}
+      height={height}
+      loader={loader}
+    />
+  )
+}
+
 export function PlantEntrySquare({ image, plantName, slug }: Plant) {
   return (
     <Link href={`/entry/${slug}`}>
       <a title={`Go to ${plantName}`}>
         <div className="opacity-95 hover:opacity-100">
-          <img src={image.url} width={460} />
+          <Image
+            layout="responsive"
+            aspectRatio="4:3"
+            src={image.url}
+            width={460}
+            fit="scale"
+          />
           <div className="p-4">
             <Typography variant="h4" className="break-words">
               {plantName}
