@@ -1,4 +1,4 @@
-import { flatMap } from 'lodash'
+import flatMap from 'lodash/flatMap'
 import { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next'
 import Link from 'next/link'
 
@@ -64,7 +64,7 @@ type PathType = {
 }
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  if (locales === undefined) {
+  if (locales == undefined) {
     throw new Error(
       'Uh, did you forget to configure locales in your Next.js config?'
     )
@@ -80,11 +80,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
         slug,
       },
     })),
-    (path) =>
-      locales.map((loc) => ({
-        locale: loc,
-        ...path,
-      }))
+    (path) => locales.map((loc) => ({ locale: loc, ...path }))
   )
 
   return {
