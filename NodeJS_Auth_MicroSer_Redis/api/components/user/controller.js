@@ -6,7 +6,7 @@ const TABLA = "user";
 module.exports = function (injectedStore) {
   let store = injectedStore;
   if (!store) {
-    store = require("../../../store/mysql");
+    store = require("../../../store/dummy");
   }
 
   function list() {
