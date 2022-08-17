@@ -1,13 +1,14 @@
-import { createTheme } from '@material-ui/core/styles'
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import { grey, common, lightGreen } from '@material-ui/core/colors'
 
-const muiTheme = createTheme()
+const muiTheme = createMuiTheme()
+
 // It matches tailwind.config.js
 const fontSerif = `'Cormorant Garamond', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;`
 
 // Build your own theme with the Color Theme tool
 // @see https://material.io/resources/color/
-export const theme = createTheme({
+export const theme = createMuiTheme({
   palette: {
     primary: {
       main: grey['900'],
