@@ -39,12 +39,84 @@ function list(table) {
   return new Promise((resolve, reject) => {
     connection.query(`SELECT * FROM ${table}`, (err, data) => {
       if (err) return reject(err);
-
       resolve(data);
     });
   });
 }
 
+function get(table, id) {
+  return new Promise((resolve, reject) => {
+    connection.query(`SELECT * FROM ${table} WHERE id='${id}'`, (err, data) => {
+      if (err) return reject(err);
+      resolve(data);
+    });
+  });
+}
+
+function insert(table, data) {
+  return new Promise((resolve, reject) => {
+    connection.query(`INSERT INTO ${table} SET ?`, data, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+}
+
+function update(table, data) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `UPDATE ${table} SET ? WHERE id = ?`,
+      [data, data.id],
+      (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      }
+    );
+  });
+}
+
+const upsert = async (table, data) => {
+  let row = [];
+  if (data.id) {
+    row = await get(table, data.id);
+  }
+
+  if (row.length === 0) {
+    return insert(table, data);
+  } else {
+    return update(table, data);
+  }
+};
+
+function query(table, query, join) {
+  let joinQuery = "";
+  if (join) {
+    const key = Object.keys(join)[0];
+    const val = join[key];
+    joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
+    // Object.entries(join).forEach(([key, value]) => {
+    //     const[from, to] = value;
+    //     joinQuery+= `JOIN ${key} ON ${table}.${from} = ${key}.${to}`;
+    // })
+  }
+  // debug(`${table}, ${JSON.stringify(query)}, ${joinQuery}`);
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT * FROM ${table} ${joinQuery}  WHERE  ${table}.?`,
+      query,
+      (err, res) => {
+        if (err) return reject(err);
+        //AQUI+++++
+        //resolve(res[0] || null);
+        resolve(res || null);
+      }
+    );
+  });
+}
+
 module.exports = {
   list,
+  get,
+  upsert,
+  query,
 };

@@ -15,23 +15,25 @@ function verify(token) {
 const check = {
   own: function (req, owner) {
     const decoded = decodeHeader(req);
-    console.log(decoded);
-
-    // COMPROBAR SI ES O NO PROPIO
+    // console.log(decoded);
+    console.log("ID", decoded.id);
 
     if (decoded.id !== owner) {
       throw error("No puedes hacer esto", 401);
     }
   },
+  logged: function (req, owner) {
+    const decoded = decodeHeader(req);
+  },
 };
 
 function getToken(auth) {
   if (!auth) {
-    throw new Error("No viene token");
+    throw error("No viene token", 401);
   }
 
   if (auth.indexOf("Bearer ") === -1) {
-    throw new Error("Formato invalido");
+    throw error("Formato invalido", 401);
   }
 
   let token = auth.replace("Bearer ", "");
