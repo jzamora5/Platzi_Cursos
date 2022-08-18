@@ -88,13 +88,29 @@ const upsert = async (table, data) => {
   }
 };
 
-function query(table, query) {
+function query(table, query, join) {
+  let joinQuery = "";
+  if (join) {
+    const key = Object.keys(join)[0];
+    const val = join[key];
+    joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
+    // Object.entries(join).forEach(([key, value]) => {
+    //     const[from, to] = value;
+    //     joinQuery+= `JOIN ${key} ON ${table}.${from} = ${key}.${to}`;
+    // })
+  }
+  // debug(`${table}, ${JSON.stringify(query)}, ${joinQuery}`);
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
-      if (err) return reject(err);
-
-      resolve(res[0] || null);
-    });
+    connection.query(
+      `SELECT * FROM ${table} ${joinQuery}  WHERE  ${table}.?`,
+      query,
+      (err, res) => {
+        if (err) return reject(err);
+        //AQUI+++++
+        //resolve(res[0] || null);
+        resolve(res || null);
+      }
+    );
   });
 }
 
