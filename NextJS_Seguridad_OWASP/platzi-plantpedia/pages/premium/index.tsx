@@ -8,7 +8,7 @@ import { Button } from '@ui/Button'
 import { Layout } from '@components/Layout'
 import { AccessDenied } from '@components/AccessDenied'
 
-import { useSession, getSession } from 'next-auth/client'
+import { useSession, getSession } from '@auth/client'
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
   const session = await getSession(context)

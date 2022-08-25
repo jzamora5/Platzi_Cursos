@@ -18,12 +18,14 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@types/sanitize-html": "^2.6.2",
     "cookie": "^0.4.1",
     "next": "10.2.3",
     "next-auth": "^3.26.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-query": "^3.17.0"
+    "react-query": "^3.17.0",
+    "sanitize-html": "^2.7.1"
   },
   "devDependencies": {
     "@apollo/client": "^3.3.20",

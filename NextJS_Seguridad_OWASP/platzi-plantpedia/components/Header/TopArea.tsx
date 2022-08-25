@@ -6,7 +6,7 @@ import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
 import { Button } from '@ui/Button'
 
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, signOut, useSession } from '@auth/client'
 
 export function TopArea() {
   return (
