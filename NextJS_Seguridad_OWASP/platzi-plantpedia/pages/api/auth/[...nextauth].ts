@@ -12,6 +12,7 @@ const options: NextAuthOptions = {
   session: {
     // Use JWT to manage sessions since we aren't using a Database
     jwt: true,
+    maxAge: 60 * 15, // 15 minutos
   },
   jwt: {},
   providers: [
