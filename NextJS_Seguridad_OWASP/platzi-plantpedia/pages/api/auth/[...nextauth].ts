@@ -12,8 +12,14 @@ const options: NextAuthOptions = {
   session: {
     // Use JWT to manage sessions since we aren't using a Database
     jwt: true,
+    maxAge: 60 * 15, // 15 min
   },
-  jwt: {},
+  jwt: {
+    secret: process.env.AUTH_JWT_SECRET,
+    signingKey: process.env.AUTH_JWT_SIGNIN_KEY,
+    encryption: true,
+    encryptionKey: process.env.AUTH_JWT_ENCRYPTION_KEY,
+  },
   providers: [
     Providers.Credentials({
       name: 'Platzi',
