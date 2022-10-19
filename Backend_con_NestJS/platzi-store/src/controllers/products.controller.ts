@@ -84,10 +84,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return {
-      message: 'accion de borrar',
-      id,
-    };
+  delete(@Param('id') id: string) {
+    return this.productService.remove(+id);
   }
 }
