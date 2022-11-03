@@ -1,8 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
+  constructor(
+    @Inject('API_KEY') private apiKey: string,
+    @Inject('TASKS') private tasks: any[],
+  ) {}
+
   getHello(): string {
-    return 'Hello World!';
+    // console.log('tasks', this.tasks);
+
+    return `Hello World! ${this.apiKey}`;
   }
 }
