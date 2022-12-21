@@ -11,7 +11,7 @@ export const StepsLayout = ({ state, send }) => {
       return <Welcome send={send} />;
     }
     if (state.matches("search")) {
-      return <Search send={send} />;
+      return <Search state={state} send={send} />;
     }
     if (state.matches("passengers")) {
       return <Passengers state={state} send={send} />;
