@@ -6,6 +6,8 @@ import { Tickets } from "../Components/Tickets";
 import "./StepsLayout.css";
 
 export const StepsLayout = ({ state, send }) => {
+  console.log("STATE", state);
+
   const renderContent = () => {
     if (state.matches("initial")) {
       return <Welcome send={send} />;
