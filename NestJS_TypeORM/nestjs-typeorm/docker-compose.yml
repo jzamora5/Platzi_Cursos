@@ -12,3 +12,14 @@ services:
       - '5432:5432'
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+
+  # A la hora de crear el server en pgAdmin en vez de poner el IP podemos
+  # ingresar el nombre de servicio (el de docker compose)
+  # Host name/ address: postgres
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - '5050:80'

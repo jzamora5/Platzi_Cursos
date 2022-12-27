@@ -1,0 +1,23 @@
+# Run detached postgres
+docker-compose up -d postgres
+
+# Check running services
+docker-compose ps
+
+# Check container ids
+docker ps
+
+# Inspect IP
+docker inspect [CONTAINER ID]
+
+# Follow Logs
+docker-compose logs postgres 
+
+# Execute bash for running commands
+docker-compose exec postgres bash
+
+# Connect to postgres
+psql -h localhost -d my_db -U root
+
+# Run detached pgadmin
+docker-compose up -d pgadmin
