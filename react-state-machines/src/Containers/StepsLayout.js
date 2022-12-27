@@ -17,7 +17,7 @@ export const StepsLayout = ({ state, send }) => {
       return <Passengers state={state} send={send} />;
     }
     if (state.matches("tickets")) {
-      return <Tickets send={send} />;
+      return <Tickets send={send} context={state.context} />;
     }
 
     return null;
