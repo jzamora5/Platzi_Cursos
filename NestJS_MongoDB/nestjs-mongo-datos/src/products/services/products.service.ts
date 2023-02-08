@@ -20,14 +20,11 @@ export class ProductsService {
       const filters: FilterQuery<Product> = {};
       const { limit, offset } = params;
       const { minPrice, maxPrice } = params;
-
       if (minPrice && maxPrice) {
-        filters.price = { $gt: minPrice, $lt: maxPrice };
+        filters.price = { $gte: minPrice, $lte: maxPrice };
       }
-
       return this.productModel.find(filters).skip(offset).limit(limit).exec();
     }
-
     return this.productModel.find().exec();
   }
 
@@ -41,7 +38,6 @@ export class ProductsService {
 
   create(data: CreateProductDto) {
     const newProduct = new this.productModel(data);
-
     return newProduct.save();
   }
 
@@ -49,11 +45,9 @@ export class ProductsService {
     const product = this.productModel
       .findByIdAndUpdate(id, { $set: changes }, { new: true })
       .exec();
-
     if (!product) {
       throw new NotFoundException(`Product #${id} not found`);
     }
-
     return product;
   }
 
