@@ -1,3 +1,4 @@
+import { SubDoc, SubDocSchema } from './sub-doc.entity';
 import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
@@ -32,6 +33,12 @@ export class Product extends Document {
     ref: Brand.name,
   })
   brand: Brand | Types.ObjectId;
+
+  @Prop({ type: SubDocSchema })
+  subDoc: SubDoc; // 👈 new field (1:1)
+
+  @Prop({ type: [SubDocSchema] })
+  subDocs: Types.Array<SubDoc>;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
