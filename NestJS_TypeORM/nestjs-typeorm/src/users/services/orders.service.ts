@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateOrderDto, UpdateOrderDto } from '../dtos/order.dto';
-import { Customer } from '../entities/customer.entity';
-import { Order } from '../entities/order.entity';
+
+import { Order } from './../entities/order.entity';
+import { Customer } from './../entities/customer.entity';
+import { CreateOrderDto, UpdateOrderDto } from './../dtos/order.dto';
 
 @Injectable()
 export class OrdersService {
@@ -21,7 +22,7 @@ export class OrdersService {
       relations: ['items', 'items.product'],
     });
     if (!order) {
-      throw new NotFoundException(`order ${id} not found`);
+      throw new NotFoundException('not found');
     }
     return order;
   }
@@ -44,7 +45,7 @@ export class OrdersService {
     return this.orderRepo.save(order);
   }
 
-  delete(id: number) {
+  remove(id: number) {
     return this.orderRepo.delete(id);
   }
 }

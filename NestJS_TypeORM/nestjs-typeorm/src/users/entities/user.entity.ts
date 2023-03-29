@@ -22,9 +22,9 @@ export class User {
 
   @Exclude()
   @Column({ type: 'varchar', length: 255 })
-  password: string; // Encrypt
+  password: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 100 })
   role: string;
 
   @CreateDateColumn({

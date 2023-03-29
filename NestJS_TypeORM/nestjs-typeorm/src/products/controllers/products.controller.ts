@@ -10,11 +10,12 @@ import {
   HttpStatus,
   HttpCode,
   Res,
-  ParseIntPipe,
+  // ParseIntPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
+import { ParseIntPipe } from '../../common/parse-int.pipe';
 import {
   CreateProductDto,
   UpdateProductDto,
@@ -30,9 +31,6 @@ export class ProductsController {
   @Get()
   @ApiOperation({ summary: 'List of products' })
   getProducts(@Query() params: FilterProductsDto) {
-    // return {
-    //   message: `products limit=> ${limit} offset=> ${offset} brand=> ${brand}`,
-    // };
     return this.productsService.findAll(params);
   }
 
@@ -52,10 +50,6 @@ export class ProductsController {
 
   @Post()
   create(@Body() payload: CreateProductDto) {
-    // return {
-    //   message: 'accion de crear',
-    //   payload,
-    // };
     return this.productsService.create(payload);
   }
 
@@ -66,7 +60,7 @@ export class ProductsController {
 
   @Put(':id/category/:categoryId')
   addCategoryToProduct(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: number,
     @Param('categoryId', ParseIntPipe) categoryId: number,
   ) {
     return this.productsService.addCategoryToProduct(id, categoryId);

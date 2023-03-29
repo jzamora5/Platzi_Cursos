@@ -46,7 +46,6 @@ export class Order {
           itemId: item.id,
         }));
     }
-
     return [];
   }
 
@@ -60,7 +59,6 @@ export class Order {
           return total + totalItem;
         }, 0);
     }
-
     return 0;
   }
 }
