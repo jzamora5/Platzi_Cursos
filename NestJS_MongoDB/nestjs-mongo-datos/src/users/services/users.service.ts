@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from '../entities/user.entity';
 import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
 import { ProductsService } from '../../products/services/products.service';
+import { exec } from 'node:child_process';
 
 @Injectable()
 export class UsersService {
@@ -44,9 +45,7 @@ export class UsersService {
     const hashPassword = await bcrypt.hash(newModel.password, 10);
     newModel.password = hashPassword;
     const model = await newModel.save();
-
     const { password, ...rta } = model.toJSON();
-
     return rta;
   }
 
