@@ -1,4 +1,8 @@
-export const template = (html: string, initialProps = {}): string => {
+export const template = (
+  html: string,
+  initialProps = {},
+  styles = ""
+): string => {
   return `
    <!DOCTYPE html>
    <html lang="es">
@@ -14,6 +18,7 @@ export const template = (html: string, initialProps = {}): string => {
        />
        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
        <title>Helix App</title>
+       ${styles}
      </head>
    
      <body>
