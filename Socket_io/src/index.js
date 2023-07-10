@@ -14,19 +14,27 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("Clientes conectados: ", io.engine.clientsCount);
-  console.log("ID del socket conectado", socket.id);
+  // console.log("Clientes conectados: ", io.engine.clientsCount);
+  // console.log("ID del socket conectado", socket.id);
+  // socket.on("disconnect", () => {
+  //   console.log("El socket " + socket.id + " se ha desconectado");
+  // });
+  // socket.conn.once("upgrade", () => {
+  //   console.log(
+  //     "Hemos pasado de HTTP Long-Polling a",
+  //     socket.conn.transport.name
+  //   );
+  // });
 
-  socket.on("disconnect", () => {
-    console.log("El socket " + socket.id + " se ha desconectado");
+  // Emisión básica
+  socket.emit("welcome", "Ahora estás conectado 😎");
+
+  socket.on("server", (data) => {
+    console.log(data);
   });
 
-  socket.conn.once("upgrade", () => {
-    console.log(
-      "Hemos pasado de HTTP Long-Polling a",
-      socket.conn.transport.name
-    );
-  });
+  // Emisión a todos
+  io.emit("everyone", socket.id + " se ha conectado 👀");
 });
 
 httpServer.listen(3000);

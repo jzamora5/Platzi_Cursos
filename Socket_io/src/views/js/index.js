@@ -1,27 +1,42 @@
 const socket = io();
 
-function checkSocketStatus() {
-  console.log("Estado del socket:", socket.connected);
-}
-
-socket.on("connect", () => {
-  console.log("El socket se ha conectado: ", socket.id);
-  checkSocketStatus();
+socket.on("welcome", (data) => {
+  console.log(data);
+  text.textContent = data;
 });
 
-socket.on("connect_error", () => {
-  console.log("No pude conectarme 😔");
+const emitToServer = document.querySelector("#emit-to-server");
+
+emitToServer.addEventListener("click", () => {
+  socket.emit("server", "Hola, servidor 👀");
 });
 
-socket.on("disconnect", () => {
-  console.log("El socket se ha desconectado: ", socket.id);
-  checkSocketStatus();
+socket.on("everyone", (message) => {
+  console.log(message);
 });
 
-socket.io.on("reconnect_attempt", () => {
-  console.log("Estoy intentando reconectarme 🖥️");
-});
+// function checkSocketStatus() {
+//   console.log("Estado del socket:", socket.connected);
+// }
 
-socket.io.on("reconnect", () => {
-  console.log("¡Me he vuelto a conectar! 😄");
-});
+// socket.on("connect", () => {
+//   console.log("El socket se ha conectado: ", socket.id);
+//   checkSocketStatus();
+// });
+
+// socket.on("connect_error", () => {
+//   console.log("No pude conectarme 😔");
+// });
+
+// socket.on("disconnect", () => {
+//   console.log("El socket se ha desconectado: ", socket.id);
+//   checkSocketStatus();
+// });
+
+// socket.io.on("reconnect_attempt", () => {
+//   console.log("Estoy intentando reconectarme 🖥️");
+// });
+
+// socket.io.on("reconnect", () => {
+//   console.log("¡Me he vuelto a conectar! 😄");
+// });
