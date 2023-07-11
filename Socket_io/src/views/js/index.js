@@ -1,71 +1,30 @@
 const socket = io();
 
-socket.on("welcome", (data) => {
-  console.log(data);
-  text.textContent = data;
-});
+const circle = document.querySelector("#circle");
 
-const emitToServer = document.querySelector("#emit-to-server");
-
-emitToServer.addEventListener("click", () => {
-  socket.emit("server", "Hola, servidor 👀");
-});
-
-socket.on("everyone", (message) => {
-  console.log(message);
-});
-
-const emitToLast = document.querySelector("#emit-to-last");
-
-emitToLast.addEventListener("click", () => {
-  socket.emit("last", "Hola 😃");
-});
-
-socket.on("salute", (message) => {
-  console.log(message);
-});
-
-// on, once, off
-socket.on("on", () => {
-  console.log("Se emite varias veces");
-});
-
-socket.once("once", () => {
-  console.log("Se emite una vez");
-});
-
-const listener = () => {
-  console.log("Se apaga el evento");
+const drawCircle = (position) => {
+  circle.style.top = position.top;
+  circle.style.left = position.left;
 };
 
-socket.on("off", listener);
+const drag = (e) => {
+  const position = {
+    top: e.clientY + "px",
+    left: e.clientX + "px",
+  };
 
-setTimeout(() => {
-  socket.off("off", listener);
-}, 2000);
+  drawCircle(position);
+  socket.emit("circle position", position);
+};
 
-// function checkSocketStatus() {
-//   console.log("Estado del socket:", socket.connected);
-// }
+document.addEventListener("mousedown", (e) => {
+  document.addEventListener("mousemove", drag);
+});
 
-// socket.on("connect", () => {
-//   console.log("El socket se ha conectado: ", socket.id);
-//   checkSocketStatus();
-// });
+document.addEventListener("mouseup", (e) => {
+  document.removeEventListener("mousemove", drag);
+});
 
-// socket.on("connect_error", () => {
-//   console.log("No pude conectarme 😔");
-// });
-
-// socket.on("disconnect", () => {
-//   console.log("El socket se ha desconectado: ", socket.id);
-//   checkSocketStatus();
-// });
-
-// socket.io.on("reconnect_attempt", () => {
-//   console.log("Estoy intentando reconectarme 🖥️");
-// });
-
-// socket.io.on("reconnect", () => {
-//   console.log("¡Me he vuelto a conectar! 😄");
-// });
+socket.on("move circle", (position) => {
+  drawCircle(position);
+});
