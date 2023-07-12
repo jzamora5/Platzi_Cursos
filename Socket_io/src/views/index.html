@@ -8,28 +8,11 @@
     <title>¡Servidor con Express y Socket.io!</title>
   </head>
   <body>
-    <!-- <h1>Funciona UwU</h1> -->
+    <h1>Chat de <span id="namespace"></span></h1>
 
-    <!-- <p id="text"></p>
+    <ul id="chat"></ul>
 
-    <button id="emit-to-server">Presioname 👀</button>
-    <button id="emit-to-last">Saluda al último conectado 😀</button> -->
-
-    <!-- <div id="circle"></div> -->
-
-    <ul class="room" id="room1"></ul>
-
-    <ul class="room" id="room2"></ul>
-
-    <ul class="room" id="room3"></ul>
-
-    <button id="connectRoom1">Room 1</button>
-    <button id="connectRoom2">Room 2</button>
-    <button id="connectRoom3">Room 3</button>
-
-    <br />
-
-    <button id="sendMessage">Enviar mensaje</button>
+    <button id="sendMessage"></button>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js//index.js"></script>
