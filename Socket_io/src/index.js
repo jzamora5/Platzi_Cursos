@@ -13,24 +13,10 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-const teachers = io.of("teachers");
-const students = io.of("students");
-
-teachers.on("connection", (socket) => {
-  console.log(socket.id + " se ha conectado a la sala de profes");
-
-  socket.on("send message", data => {
-    teachers.emit("message", data)
-  })
-
-});
-
-students.on("connection", (socket) => {
-  console.log(socket.id + " se ha conectado a la sala de estudiantes");
-
-  socket.on("send message", data => {
-    students.emit("message", data)
-  })
+io.on("connection", (socket) => {
+  socket.on("is connected", (msg) => {
+    console.log(msg);
+  });
 });
 
 httpServer.listen(3000);

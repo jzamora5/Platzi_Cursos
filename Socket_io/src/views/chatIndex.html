@@ -8,9 +8,11 @@
     <title>¡Servidor con Express y Socket.io!</title>
   </head>
   <body>
-    <button id="send">Send to all clients connected</button>
-    <button id="disconnect">Disconnect</button>
-    <button id="reconnect">Reconnect</button>
+    <h1>Chat de <span id="namespace"></span></h1>
+
+    <ul id="chat"></ul>
+
+    <button id="sendMessage">Enviar Mensaje</button>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js//index.js"></script>
