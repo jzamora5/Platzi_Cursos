@@ -2,10 +2,22 @@ const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
+const { instrument } = require("@socket.io/admin-ui");
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+
+// http://localhost:3000
+const io = new Server(httpServer, {
+  cors: {
+    origin: ["https://admin.socket.io"],
+    credentials: true,
+  },
+});
+
+instrument(io, {
+  auth: false,
+});
 
 app.use(express.static(path.join(__dirname, "views")));
 
@@ -14,7 +26,9 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  socket.on("circle position", (position) => {
+    socket.broadcast.emit("move circle", position);
+  });
 });
 
 httpServer.listen(3000);
