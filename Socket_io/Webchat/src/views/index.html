@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>¡Michi Chat!</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/chat.css" />
   </head>
   <body>
     <header>Michi Chat</header>
+
+    <main>
+      <div id="all-messages"></div>
+
+      <div class="send-message">
+        <input type="text" id="message" />
+        <button type="button" id="send-message" class="btn secondary">
+          Enviar
+        </button>
+      </div>
+    </main>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/script.js"></script>
