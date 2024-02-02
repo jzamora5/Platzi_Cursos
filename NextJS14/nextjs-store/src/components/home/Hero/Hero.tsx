@@ -1,7 +1,10 @@
+import styles from "./Hero.module.sass";
+
 export const Hero = () => {
   return (
-    <div>
-      <h1>Hero</h1>
-    </div>
+    <section className={styles.Hero}>
+      <h1 className="h1">Future World</h1>
+      <h2 className="h2">Empowering Your Tomorrow, Today!</h2>
+    </section>
   );
 };
