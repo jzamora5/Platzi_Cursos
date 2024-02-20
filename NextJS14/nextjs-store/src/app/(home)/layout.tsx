@@ -9,8 +9,8 @@ export default function HomeLayout({
   return (
     <div>
       <Hero />
-      {children}
       <Description />
+      {children}
     </div>
   );
 }
