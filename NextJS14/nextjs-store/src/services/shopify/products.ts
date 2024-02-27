@@ -43,6 +43,10 @@ export const getMainProducts = async () => {
     // next: {
     //   revalidate: 3600,
     // },
+    cache: "force-cache",
+    next: {
+      tags: ["main-products"],
+    },
   });
 
   const { products } = await response.json();
