@@ -22,8 +22,9 @@ export const ProductViewItemsOrder = ({
       title: product.title,
       price: product.price,
       quantity: counter,
+      merchandiseId: product.gql_id,
       id: product.id,
-    });
+    } as CartItem);
   };
 
   const handleSubmit = (event: SyntheticEvent) => {
