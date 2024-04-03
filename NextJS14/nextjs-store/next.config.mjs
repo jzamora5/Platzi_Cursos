@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 import path from "path";
+import NextBundleAnalyzer from "@next/bundle-analyzer";
+
 const __dirname = path.resolve();
+
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig = {
   sassOptions: {
@@ -18,4 +24,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
