@@ -1,0 +1,52 @@
+{
+  "name": "platzi-nextjs-15",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "bookmarks:db:studio": "drizzle-kit studio",
+    "bookmarks:db:push": "drizzle-kit push",
+    "bookmarks:db:generate": "drizzle-kit generate",
+    "bookmarks:db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "v2-latest",
+    "@chakra-ui/next-js": "v2-latest",
+    "@chakra-ui/react": "v2-latest",
+    "@emotion/react": "11.13.5",
+    "@emotion/styled": "11.13.5",
+    "@formatjs/intl-localematcher": "^0.5.8",
+    "@heroicons/react": "^2.2.0",
+    "@launchdarkly/node-server-sdk": "^9.7.2",
+    "@next/bundle-analyzer": "^15.1.0",
+    "@sentry/nextjs": "^8",
+    "@tanstack/react-query": "^5.62.2",
+    "@types/negotiator": "^0.6.3",
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.29.1",
+    "drizzle-orm": "^0.37.0",
+    "esbuild": "^0.24.2",
+    "framer-motion": "11.13.1",
+    "jose": "^5.9.6",
+    "negotiator": "^1.0.0",
+    "next": "15.0.3",
+    "postgres": "^3.4.5",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.9",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "postcss": "^8",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

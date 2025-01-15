@@ -1,0 +1,8 @@
+{
+  "heading": "Internacionalización",
+  "description": "En esta página encontrarás la información para hacer tu aplicación disponible en otros idiomas.",
+  "balance": "Balance",
+  "date": "Fecha",
+  "internationalization": "Internacionalización: proceso de diseñar y desarrollar la aplicación de manera que pueda admitir múltiples idiomas, regiones y normas.",
+  "locale": "Locale: región geográfica, lingüística o cultural específica, que define las convenciones y preferencias utilizadas en aplicaciones de software."
+}
