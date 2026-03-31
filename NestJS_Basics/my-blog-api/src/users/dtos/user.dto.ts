@@ -15,13 +15,13 @@ export class CreateUserDto {
 
   @ValidateNested()
   @Type(() => CreateProfileDto)
-  // @IsNotEmpty()
+  @IsNotEmpty()
   profile: CreateProfileDto;
 }
 
 export class UpdateUserDto extends PartialType(OmitType(CreateUserDto, ['profile'])) {
-  // @ValidateNested()
-  // @Type(() => UpdateProfileDto)
-  // @IsOptional()
-  // profile: UpdateProfileDto;
+  @ValidateNested()
+  @Type(() => UpdateProfileDto)
+  @IsOptional()
+  profile: UpdateProfileDto;
 }

@@ -12,7 +12,9 @@ export class UsersService {
   ) {}
 
   async findAll() {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({
+      relations: ['profile'],
+    });
     return users;
   }
 
@@ -23,6 +25,22 @@ export class UsersService {
     }
     return user;
   }
+
+  async getProfileByUserId(id: number) {
+    const user = await this.findOne(id);
+    return user.profile;
+  }
+
+  // async getPostsByUserId(id: number) {
+  //   const user = await this.usersRepository.findOne({
+  //     where: { id },
+  //     relations: ['posts'],
+  //   });
+  //   if (!user) {
+  //     throw new NotFoundException(`User with id ${id} not found`);
+  //   }
+  //   return user.posts;
+  // }
 
   async create(body: CreateUserDto) {
     try {
@@ -57,6 +75,7 @@ export class UsersService {
   private async findOne(id: number) {
     const user = await this.usersRepository.findOne({
       where: { id },
+      relations: ['profile'],
     });
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);

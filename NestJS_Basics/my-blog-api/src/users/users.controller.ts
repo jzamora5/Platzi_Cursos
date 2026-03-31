@@ -16,6 +16,11 @@ export class UsersController {
     return this.usersService.getUserById(id);
   }
 
+  @Get(':id/profile')
+  getProfile(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.getProfileByUserId(id);
+  }
+
   @Post()
   createUser(@Body() body: CreateUserDto) {
     return this.usersService.create(body);
